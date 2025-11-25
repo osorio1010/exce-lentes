@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Exce-Lentes Óptica</title>
+  <link rel="stylesheet" href="Style.css" />
+  <link rel="icon" type="image/png" href="Imagenes/Logos/logo.png" />
+</head>
+
+<body>
+
+  <!-- ===== BANNER PROMOCIONAL ===== -->
+  <div class="promo-banner">
+    <span>🕶️ Por compras desde 60 mil, lleva tu segundo armazón de regalo 🕶️ ㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤ🇨🇱 Por compras desde 100 mil, envío gratis a todo Chile 🇨🇱</span>
+  </div>
+
+  <!-- ===== HEADER ===== -->
+  <header>
+    <div class="logo">
+      <img src="Imagenes/Logos/logob.png" alt="Logo Exce-Lentes">
+      <h1>Exce-Lentes</h1>
+    </div>
+    <nav>
+      <ul>
+        <li><a href="#" onclick="filtrarTipo('opticos')">Ópticos</a></li>
+        <li><a href="#" onclick="filtrarTipo('solares')">Solares</a></li>
+        <li><a href="#" onclick="filtrarGenero('hombre')">Hombre</a></li>
+        <li><a href="#" onclick="filtrarGenero('mujer')">Mujer</a></li>
+        <li><a href="#" onclick="filtrarGenero('nino')">Niño</a></li>
+        <li><a href="#" onclick="filtrarGenero('unisex')">Unisex</a></li>
+        <li><a href="#" onclick="mostrarProductos(lentes, 'todos')">Todos</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- ===== SLIDER ===== -->
+  <section class="slider">
+    <div class="slider-container" id="slider-container">
+      <img src="Imagenes/modelo/sl1.jpg" alt="Lente 1">
+      <img src="Imagenes/modelo/sl2.jpg" alt="Lente 2">
+      <img src="Imagenes/modelo/sl3.jpg" alt="Lente 3">
+      <img src="Imagenes/modelo/sl4.jpg" alt="Lente 4">
+    </div>
+    <button class="prev" onclick="prevSlide()">&#10094;</button>
+    <button class="next" onclick="nextSlide()">&#10095;</button>
+    <div class="slider-dots" id="slider-dots"></div>
+  </section>
+
+  <!-- ===== PRODUCTOS DESTACADOS ===== -->
+  <main>
+    <section class="destacados" id="destacados">
+      <h2>Lentes Destacados</h2>
+      <div class="productos" id="productos-container"></div>
+    </section>
+  </main>
+
+  <!-- ===== DETALLE PRODUCTO ===== -->
+  <section id="detalle-producto">
+    <button id="cerrar-detalle" onclick="cerrarDetalle()" class="cerrar-btn">✕</button>
+    <img id="detalle-imagen" src="" alt="Detalle del lente">
+    <div class="info">
+      <h2 id="detalle-nombre"></h2>
+      <ul>
+        <li>Lente completo en orgánico</li>
+        <li>Antirreflejos + filtro UV</li>
+        <li>Aumento desde +2.00 con -2.00 de Miopía y Astigmatismo</li>
+        <li>Incluye estuche rígido y paño limpiador</li>
+      </ul>
+      <p class="precio" id="detalle-precio"></p>
+      <a id="detalle-whatsapp" href="#" target="_blank" class="btn-whatsapp">💬 Consultar por WhatsApp</a>
+    </div>
+  </section>
+
+  <!-- ===== CATÁLOGO ===== -->
+  <section id="catalogo">
+    <h2>Catálogo Completo</h2>
+    <p>¿Tienes dudas? <a href="https://wa.me/56963623444" target="_blank" class="whatsapp">Consulta por WhatsApp</a></p>
+  </section>
+
+  <!-- ===== SECCIÓN INFORMATIVA ===== -->
+  <section class="info-empresa">
+    <div class="info-column">
+      <h3>MISIÓN</h3>
+      <p>En Ópticas Excelentes trabajamos cada día para cuidar la salud visual de las personas, ofreciendo un servicio integral que combina atención cercana, precios convenientes, rapidez en la entrega y un sólido respaldo postventa. Nuestro compromiso es brindar soluciones ópticas de calidad que garanticen la satisfacción y confianza de nuestros clientes y sus familias..</p>
+    </div>
+
+    <div class="info-column">
+      <h3>VISIÓN</h3>
+      <p>Ser una óptica reconocida por su cercanía y confianza, construyendo relaciones duraderas con nuestros clientes y generando alianzas con empresas y organizaciones de distintos rubros. Buscamos posicionarnos como una marca accesible, innovadora y comprometida con mejorar la calidad de vida visual de todas las personas..</p>
+    </div>
+
+
+    <div class="info-column final">
+      <h3>CONTÁCTANOS</h3>
+      <p>📍 Dirección: Av. Moneda 772, Local 9 L 301- B Santiago</p>
+      <p>ㅤ</p>
+      <p>📬 Correo: opticasexcelentes9@gmail.com</p>
+      <p>ㅤ</p>
+      <p>📞 Teléfono: +56 9 6372 6881</p>
+      <p>ㅤ</p>
+      <div class="redes">
+        <a href="https://www.tiktok.com/@opticas.excelentes?_r=1&_t=ZM-91D3FEQzSu0"><img src="Imagenes/iconos/tik-tok.png" alt="Tiktok"></a>
+        <a href="https://www.instagram.com/opticasexcelentes_?igsh=MXBqZW04dGs1YW1mOA=="><img src="Imagenes/iconos/instagram.png" alt="Instagram"></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer>
+    <p>© 2025 Exce-Lentes | Todos los derechos reservados</p>
+  </footer>
+
+  <!-- ===== SCRIPT PRINCIPAL ===== -->
+  <script>
+    // ===== SLIDER =====
+    const slides = document.getElementById('slider-container');
+    const total = slides.children.length;
+    const dotsContainer = document.getElementById('slider-dots');
+    let index = 0;
+
+    for (let i = 0; i < total; i++) {
+      const dot = document.createElement('span');
+      dot.classList.add('dot');
+      if (i === 0) dot.classList.add('active');
+      dot.addEventListener('click', () => goToSlide(i));
+      dotsContainer.appendChild(dot);
+    }
+
+    const dots = document.querySelectorAll('.dot');
+
+    function goToSlide(i) {
+      index = i;
+      slides.style.transform = `translateX(${-index * 25}%)`; // 4 imágenes → 25% cada una
+      updateDots();
+    }
+
+    function updateDots() {
+      dots.forEach((dot, i) => dot.classList.toggle('active', i === index));
+    }
+
+    function nextSlide() {
+      index = (index + 1) % total;
+      goToSlide(index);
+    }
+
+    function prevSlide() {
+      index = (index - 1 + total) % total;
+      goToSlide(index);
+    }
+
+    setInterval(nextSlide, 4000);
+    goToSlide(0);
+
+    // ===== PRODUCTOS =====
+    const lentes = [
+      {nombre:"Classic", precio:44990, tipo:"opticos", genero:"unisex", img:"Imagenes/lentes/IMG_1747.jpg"},
+      {nombre:"Elegance", precio:44990, tipo:"opticos", genero:"mujer", img:"Imagenes/lentes/IMG_1746.jpg"},
+      {nombre:"SolarMax", precio:44990, tipo:"solares", genero:"unisex", img:"Imagenes/lentes/IMG_1739.jpg"},
+      {nombre:"SunPro", precio:44990, tipo:"solares", genero:"hombre", img:"lente4.jpg"},
+      {nombre:"HombreFit", precio:44990, tipo:"opticos", genero:"hombre", img:"Imagenes/lentes/IMG_1743.jpg"},
+      {nombre:"HombreUrban", precio:44990, tipo:"solares", genero:"hombre", img:"Imagenes/lentes/IMG_1745.jpg"},
+      {nombre:"MujerChic", precio:44990, tipo:"opticos", genero:"mujer", img:"Imagenes/lentes/IMG_1740.jpg"},
+      {nombre:"MujerStyle", precio:44990, tipo:"solares", genero:"mujer", img:"Imagenes/lentes/IMG_1750.jpg"},
+      {nombre:"NiñoCool", precio:44990, tipo:"opticos", genero:"nino", img:"lente3.jpg"},
+      {nombre:"NiñoFun", precio:44990, tipo:"solares", genero:"nino", img:"Imagenes/lentes/IMG_1741.jpg"},
+      {nombre:"UnisexTrend", precio:44990, tipo:"opticos", genero:"unisex", img:"Imagenes/lentes/IMG_1748.jpg"},
+      {nombre:"UnisexClassic", precio:44990, tipo:"solares", genero:"unisex", img:"lente6.jpg"}
+    ];
+
+    function mostrarProductos(productos, categoria="Destacados"){
+      const container = document.getElementById('productos-container');
+      container.innerHTML = '';
+      const titulo = document.getElementById('destacados').querySelector('h2');
+      if(categoria === 'todos') categoria = "Todos los Lentes";
+      else if(categoria !== "Destacados") categoria = categoria.charAt(0).toUpperCase() + categoria.slice(1);
+      titulo.innerText = categoria;
+
+      productos.forEach(lente => {
+        const div = document.createElement('div');
+        div.className = 'producto';
+        div.onclick = () => mostrarDetalle(lente.nombre, lente.precio, lente.img);
+        div.innerHTML = `
+          <img src="${lente.img}" alt="${lente.nombre}">
+          <h3>${lente.nombre}</h3>
+          <p>$${lente.precio.toLocaleString('es-CL')}</p>
+        `;
+        container.appendChild(div);
+      });
+    }
+
+    function filtrarTipo(tipo){
+      const filtrados = lentes.filter(l => l.tipo === tipo);
+      mostrarProductos(filtrados, tipo);
+    }
+
+    function filtrarGenero(genero){
+      const filtrados = lentes.filter(l => l.genero === genero);
+      mostrarProductos(filtrados, genero);
+    }
+
+    function mostrarDetalle(nombre, precio, imagen){
+      document.getElementById('detalle-nombre').innerText = "Modelo " + nombre;
+      document.getElementById('detalle-precio').innerText = "$" + precio.toLocaleString('es-CL');
+      document.getElementById('detalle-imagen').src = imagen;
+      document.getElementById('detalle-whatsapp').href =
+        `https://wa.me/56963623444?text=Hola,%20quisiera%20consultar%20si%20el%20Modelo%20${nombre}%20está%20disponible.`;
+      
+      document.getElementById('detalle-producto').style.display = 'flex';
+      location.href = "#detalle-producto";
+    }
+
+    function cerrarDetalle(){
+      document.getElementById('detalle-producto').style.display = 'none';
+      location.href = "#destacados";
+    }
+
+    mostrarProductos(lentes);
+  </script>
+
+</body>
+</html>
