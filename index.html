@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Exce-Lentes Óptica</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="icon" type="image/png" href="Imagenes/Logos/logo.png" />
+  <style>
+    /* Estilo para que el logo se vea como un botón */
+    .logo-link {
+      text-decoration: none;
+      color: inherit;
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="promo-banner">
+    <span>🕶️ Por compras desde 60 mil, lleva tu segundo armazón de regalo 🕶️ ㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤ🇨🇱 Por compras desde 100 mil, envío gratis a todo Chile 🇨🇱</span>
+  </div>
+
+  <header>
+    <div class="logo">
+      <a href="index.html" class="logo-link">
+        <img src="Imagenes/Logos/logob.png" alt="Logo Exce-Lentes">
+        <h1>Exce-Lentes</h1>
+      </a>
+    </div>
+    <nav>
+      <ul>
+        <li><a href="#" onclick="filtrarTipo('opticos')">Ópticos</a></li>
+        <li><a href="#" onclick="filtrarTipo('solares')">Solares</a></li>
+        <li><a href="#" onclick="filtrarGenero('hombre')">Hombre</a></li>
+        <li><a href="#" onclick="filtrarGenero('mujer')">Mujer</a></li>
+        <li><a href="#" onclick="filtrarGenero('nino')">Niño</a></li>
+        <li><a href="#" onclick="filtrarGenero('unisex')">Unisex</a></li>
+        <li><a href="#" onclick="mostrarProductos(lentes, 'todos')">Todos</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section class="slider">
+    <div class="slider-container" id="slider-container">
+      <img src="Imagenes/modelo/sl1.jpg" alt="Lente 1">
+      <img src="Imagenes/modelo/sl2.jpg" alt="Lente 2">
+      <img src="Imagenes/modelo/sl3.jpg" alt="Lente 3">
+      <img src="Imagenes/modelo/sl4.jpg" alt="Lente 4">
+    </div>
+    <button class="prev" onclick="prevSlide()">&#10094;</button>
+    <button class="next" onclick="nextSlide()">&#10095;</button>
+    <div class="slider-dots" id="slider-dots"></div>
+  </section>
+
+  <main>
+    <section class="destacados" id="destacados">
+      <h2 id="titulo-seccion">Lentes Destacados</h2>
+      <div class="productos" id="productos-container"></div>
+    </section>
+  </main>
+
+  <section id="detalle-producto">
+    <button id="cerrar-detalle" onclick="cerrarDetalle()" class="cerrar-btn">✕</button>
+    <img id="detalle-imagen" src="" alt="Detalle del lente">
+    <div class="info">
+      <h2 id="detalle-nombre"></h2>
+      <ul>
+        <li>Lente completo en orgánico</li>
+        <li>Antirreflejos + filtro UV</li>
+        <li>Aumento desde +2.00 con -2.00 de Miopía y Astigmatismo</li>
+        <li>Incluye estuche rígido y paño limpiador</li>
+      </ul>
+      <p class="precio" id="detalle-precio"></p>
+      <a id="detalle-whatsapp" href="#" target="_blank" class="btn-whatsapp">💬 Consultar por WhatsApp</a>
+    </div>
+  </section>
+
+  <section id="catalogo">
+    <h2>Catálogo Completo</h2>
+    <p>¿Tienes dudas? <a href="https://wa.me/56963623444" target="_blank" class="whatsapp">Consulta por WhatsApp</a></p>
+  </section>
+
+  <section class="info-empresa">
+    <div class="info-column">
+      <h3>MISIÓN</h3>
+      <p>En Ópticas Excelentes trabajamos cada día para cuidar la salud visual de las personas, ofreciendo un servicio integral que combina atención cercana, precios convenientes, rapidez en la entrega y un sólido respaldo postventa.</p>
+    </div>
+
+    <div class="info-column">
+      <h3>VISIÓN</h3>
+      <p>Ser una óptica reconocida por su cercanía y confianza, construyendo relaciones duraderas con nuestros clientes y generando alianzas con empresas y organizaciones de distintos rubros.</p>
+    </div>
+
+    <div class="info-column final">
+      <h3>CONTÁCTANOS</h3>
+      <p>📍 Dirección: Av. Moneda 772, Local 9 L 301- B Santiago</p>
+      <p>📬 Correo: opticasexcelentes9@gmail.com</p>
+      <p>📞 Teléfono: +56 9 6372 6881</p>
+      <div class="redes">
+        <a href="https://www.tiktok.com/@opticas.excelentes"><img src="Imagenes/iconos/tik-tok.png" alt="Tiktok"></a>
+        <a href="https://www.instagram.com/opticaexcelentes"><img src="Imagenes/iconos/instagram.png" alt="Instagram"></a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>© 2025 Exce-Lentes | Todos los derechos reservados</p>
+  </footer>
+
+  <script>
+    // ===== SLIDER =====
+    const slides = document.getElementById('slider-container');
+    const total = slides.children.length;
+    const dotsContainer = document.getElementById('slider-dots');
+    let index = 0;
+
+    for (let i = 0; i < total; i++) {
+      const dot = document.createElement('span');
+      dot.classList.add('dot');
+      if (i === 0) dot.classList.add('active');
+      dot.addEventListener('click', () => goToSlide(i));
+      dotsContainer.appendChild(dot);
+    }
+
+    const dots = document.querySelectorAll('.dot');
+
+    function goToSlide(i) {
+      index = i;
+      slides.style.transform = `translateX(${-index * 25}%)`;
+      updateDots();
+    }
+
+    function updateDots() {
+      dots.forEach((dot, i) => dot.classList.toggle('active', i === index));
+    }
+
+    function nextSlide() {
+      index = (index + 1) % total;
+      goToSlide(index);
+    }
+
+    function prevSlide() {
+      index = (index - 1 + total) % total;
+      goToSlide(index);
+    }
+
+    setInterval(nextSlide, 4000);
+
+    // ===== LISTA DE 96 LENTES =====
+    const lentes = [
+      { nombre: "Classic", precio: 44990, tipo: "opticos", genero: "hombre", img: "Imagenes/lentes/1.jpg" },
+      { nombre: "Elegance", precio: 44990, tipo: "opticos", genero: "mujer", img: "Imagenes/lentes/2.jpg" },
+      { nombre: "SolarMax", precio: 44990, tipo: "solares", genero: "hombre", img: "Imagenes/lentes/3.jpg" },
+      { nombre: "SunPro", precio: 44990, tipo: "solares", genero: "mujer", img: "Imagenes/lentes/4.jpg" },
+      { nombre: "HombreFit", precio: 44990, tipo: "opticos", genero: "hombre", img: "Imagenes/lentes/5.jpg" },
+      { nombre: "HombreUrban", precio: 44990, tipo: "opticos", genero: "mujer", img: "Imagenes/lentes/6.jpg" },
+      { nombre: "MujerChic", precio: 44990, tipo: "opticos", genero: "mujer", img: "Imagenes/lentes/7.jpg" },
+      { nombre: "MujerStyle", precio: 44990, tipo: "opticos", genero: "mujer", img: "Imagenes/lentes/8.jpg" },
+      { nombre: "UnisexCool", precio: 44990, tipo: "opticos", genero: "unisex", img: "Imagenes/lentes/9.jpg" },
+      { nombre: "NiñoFun", precio: 44990, tipo: "opticos", genero: "mujer", img: "Imagenes/lentes/10.jpg" },
+      { nombre: "UnisexTrend", precio: 44990, tipo: "opticos", genero: "mujer", img: "Imagenes/lentes/11.jpg" },
+      { nombre: "UnisexClassic", precio: 44990, tipo: "opticos", genero: "mujer", img: "Imagenes/lentes/12.jpg" },
+      { nombre: "Titanium", precio: 44990, tipo: "opticos", genero: "mujer", img: "Imagenes/lentes/13.jpg" },
+      { nombre: "SoftView", precio: 44990, tipo: "opticos", genero: "mujer", img: "Imagenes/lentes/14.jpg" },
+      { nombre: "BlackSun", precio: 44990, tipo: "opticos", genero: "mujer", img: "Imagenes/lentes/15.jpg" },
+      { nombre: "RoseGold", precio: 44990, tipo: "opticos", genero: "unisex", img: "Imagenes/lentes/16.jpg" },
+      { nombre: "JuniorStar", precio: 44990, tipo: "opticos", genero: "hombre", img: "Imagenes/lentes/17.jpg" },
+      { nombre: "Aviator", precio: 44990, tipo: "opticos", genero: "mujer", img: "Imagenes/lentes/18.jpg" },
+      { nombre: "Modernist", precio: 44990, tipo: "opticos", genero: "mujer", img: "Imagenes/lentes/19.jpg" },
+      { nombre: "Vintage", precio: 44990, tipo: "opticos", genero: "mujer", img: "Imagenes/lentes/20.jpg" },
+      { nombre: "ActiveX", precio: 44990, tipo: "opticos", genero: "unisex", img: "Imagenes/lentes/21.jpg" },
+      { nombre: "BlueLight", precio: 44990, tipo: "opticos", genero: "mujer", img: "Imagenes/lentes/22.jpg" },
+      { nombre: "Summer", precio: 44990, tipo: "opticos", genero: "mujer", img: "Imagenes/lentes/23.jpg" },
+      { nombre: "Explorer", precio: 44990, tipo: "opticos", genero: "mujer", img: "Imagenes/lentes/24.jpg" },
+      { nombre: "Premium", precio: 44990, tipo: "opticos", genero: "hombre", img: "Imagenes/lentes/25.jpg" },
+      { nombre: "CatEye", precio: 44990, tipo: "opticos", genero: "mujer", img: "Imagenes/lentes/26.jpg" },
+      { nombre: "Iron", precio: 44990, tipo: "opticos", genero: "mujer", img: "Imagenes/lentes/27.jpg" },
+      { nombre: "Clear", precio: 44990, tipo: "opticos", genero: "mujer", img: "Imagenes/lentes/28.jpg" },
+      { nombre: "Wild", precio: 44990, tipo: "opticos", genero: "unisex", img: "Imagenes/lentes/29.jpg" },
+      { nombre: "Ruby", precio: 44990, tipo: "solares", genero: "mujer", img: "Imagenes/lentes/30.jpg" },
+      { nombre: "Smart", precio: 44990, tipo: "opticos", genero: "hombre", img: "Imagenes/lentes/31.jpg" },
+      { nombre: "DeepSea", precio: 44990, tipo: "opticos", genero: "mujer", img: "Imagenes/lentes/32.jpg" },
+      { nombre: "Noir", precio: 44990, tipo: "opticos", genero: "mujer", img: "Imagenes/lentes/33.jpg" },
+      { nombre: "Pearl", precio: 44990, tipo: "opticos", genero: "hombre", img: "Imagenes/lentes/34.jpg" },
+      { nombre: "Sunset", precio: 44990, tipo: "solares", genero: "hombre", img: "Imagenes/lentes/35.jpg" },
+      { nombre: "Speed", precio: 44990, tipo: "opticos", genero: "hombre", img: "Imagenes/lentes/36.jpg" },
+      { nombre: "Pixel", precio: 44990, tipo: "opticos", genero: "mujer", img: "Imagenes/lentes/37.jpg" },
+      { nombre: "UrbanStyle", precio: 44990, tipo: "opticos", genero: "mujer", img: "Imagenes/lentes/38.jpg" },
+      { nombre: "Glow", precio: 44990, tipo: "opticos", genero: "mujer", img: "Imagenes/lentes/39.jpg" },
+      { nombre: "Bold", precio: 44990, tipo: "opticos", genero: "mujer", img: "Imagenes/lentes/40.jpg" },
+      { nombre: "Duo", precio: 44990, tipo: "opticos", genero: "mujer", img: "Imagenes/lentes/41.jpg" },
+      { nombre: "Flash", precio: 44990, tipo: "optico", genero: "mujer", img: "Imagenes/lentes/42.jpg" },
+      { nombre: "Sky", precio: 44990, tipo: "opticos", genero: "mujer", img: "Imagenes/lentes/43.jpg" },
+      { nombre: "Emerald", precio: 44990, tipo: "opticos", genero: "unisex", img: "Imagenes/lentes/44.jpg" },
+      { nombre: "Route", precio: 44990, tipo: "opticos", genero: "mujer", img: "Imagenes/lentes/45.jpg" },
+      { nombre: "Minimal", precio: 44990, tipo: "solares", genero: "unisex", img: "Imagenes/lentes/46.jpg" },
+      { nombre: "Lady", precio: 44990, tipo: "opticos", genero: "hombre", img: "Imagenes/lentes/47.jpg" },
+      { nombre: "Brave", precio: 44990, tipo: "opticos", genero: "hombre", img: "Imagenes/lentes/48.jpg" },
+      { nombre: "Play", precio: 44990, tipo: "opticos", genero: "mujer", img: "Imagenes/lentes/49.jpg" },
+      { nombre: "Frame", precio: 44990, tipo: "opticos", genero: "mujer", img: "Imagenes/lentes/50.jpg" },
+      { nombre: "Chrono", precio: 44990, tipo: "opticos", genero: "hombre", img: "Imagenes/lentes/51.jpg" },
+      { nombre: "Velvet", precio: 44990, tipo: "opticos", genero: "mujer", img: "Imagenes/lentes/52.jpg" },
+      { nombre: "Meta", precio: 44990, tipo: "opticos", genero: "hombre", img: "Imagenes/lentes/53.jpg" },
+      { nombre: "Force", precio: 44990, tipo: "opticos", genero: "mujer", img: "Imagenes/lentes/54.jpg" },
+      { nombre: "Magic", precio: 44990, tipo: "opticos", genero: "mujer", img: "Imagenes/lentes/55.jpg" },
+      { nombre: "Zen", precio: 44990, tipo: "opticos", genero: "mujer", img: "Imagenes/lentes/56.jpg" },
+      { nombre: "Flow", precio: 44990, tipo: "opticos", genero: "unisex", img: "Imagenes/lentes/57.jpg" },
+      { nombre: "Hard", precio: 44990, tipo: "opticos", genero: "mujer", img: "Imagenes/lentes/58.jpg" },
+      { nombre: "Gloss", precio: 44990, tipo: "opticos", genero: "mujer", img: "Imagenes/lentes/59.jpg" },
+      { nombre: "SolarJet", precio: 44990, tipo: "opticos", genero: "hombre", img: "Imagenes/lentes/60.jpg" },
+      { nombre: "Small", precio: 44990, tipo: "opticos", genero: "mujer", img: "Imagenes/lentes/61.jpg" },
+      { nombre: "Steel", precio: 44990, tipo: "opticos", genero: "mujer", img: "Imagenes/lentes/62.jpg" },
+      { nombre: "Grace", precio: 44990, tipo: "opticos", genero: "mujer", img: "Imagenes/lentes/63.jpg" },
+      { nombre: "Shadow", precio: 44990, tipo: "opticos", genero: "mujer", img: "Imagenes/lentes/64.jpg" },
+      { nombre: "Pure", precio: 44990, tipo: "solares", genero: "nino", img: "Imagenes/lentes/65.jpg" },
+      { nombre: "Aura", precio: 44990, tipo: "opticos", genero: "mujer", img: "Imagenes/lentes/66.jpg" },
+      { nombre: "Fast", precio: 44990, tipo: "opticos", genero: "mujer", img: "Imagenes/lentes/67.jpg" },
+      { nombre: "Cuty", precio: 44990, tipo: "opticos", genero: "mujer", img: "Imagenes/lentes/68.jpg" },
+      { nombre: "Boss", precio: 44990, tipo: "opticos", genero: "mujer", img: "Imagenes/lentes/69.jpg" },
+      { nombre: "Silk", precio: 44990, tipo: "solares", genero: "nino", img: "Imagenes/lentes/70.jpg" },
+      { nombre: "GoldSun", precio: 44990, tipo: "opticos", genero: "unisex", img: "Imagenes/lentes/71.jpg" },
+      { nombre: "Dot", precio: 44990, tipo: "opticos", genero: "mujer", img: "Imagenes/lentes/72.jpg" },
+      { nombre: "Prime", precio: 44990, tipo: "opticos", genero: "mujer", img: "Imagenes/lentes/73.jpg" },
+      { nombre: "Vogue", precio: 44990, tipo: "opticos", genero: "hombre", img: "Imagenes/lentes/74.jpg" },
+      { nombre: "Beach", precio: 44990, tipo: "opticos", genero: "mujer", img: "Imagenes/lentes/75.jpg" },
+      { nombre: "Compact", precio: 44990, tipo: "opticos", genero: "mujer", img: "Imagenes/lentes/76.jpg" },
+      { nombre: "Rocket", precio: 44990, tipo: "opticos", genero: "mujer", img: "Imagenes/lentes/77.jpg" },
+      { nombre: "Deportivo Kid Cyan", precio: 44990, tipo: "opticos", genero: "nino", img: "Imagenes/lentes/78.jpg" },
+      { nombre: "Deportivo Kid Blue", precio: 44990, tipo: "opticos", genero: "nino", img: "Imagenes/lentes/79.jpg" },
+      { nombre: "Deportivo Kid Gray", precio: 44990, tipo: "opticos", genero: "nino", img: "Imagenes/lentes/80.jpg" },
+      { nombre: "Bloom", precio: 44990, tipo: "opticos", genero: "mujer", img: "Imagenes/lentes/81.jpg" },
+      { nombre: "River", precio: 44990, tipo: "opticos", genero: "mujer", img: "Imagenes/lentes/82.jpg" },
+      { nombre: "Junior", precio: 44990, tipo: "opticos", genero: "mujer", img: "Imagenes/lentes/83.jpg" },
+      { nombre: "Mate", precio: 44990, tipo: "opticos", genero: "hombre", img: "Imagenes/lentes/84.jpg" },
+      { nombre: "Iconic", precio: 44990, tipo: "opticos", genero: "unisex", img: "Imagenes/lentes/85.jpg" },
+      { nombre: "Focus", precio: 44990, tipo: "opticos", genero: "mujer", img: "Imagenes/lentes/86.jpg" },
+      { nombre: "Glory", precio: 44990, tipo: "opticos", genero: "mujer", img: "Imagenes/lentes/87.jpg" },
+      { nombre: "Ocean", precio: 44990, tipo: "opticos", genero: "mujer", img: "Imagenes/lentes/88.jpg" },
+      { nombre: "Panda", precio: 44990, tipo: "opticos", genero: "mujer", img: "Imagenes/lentes/89.jpg" },
+      { nombre: "Titan", precio: 44990, tipo: "opticos", genero: "mujer", img: "Imagenes/lentes/90.jpg" },
+      { nombre: "Fancy", precio: 44990, tipo: "opticos", genero: "mujer", img: "Imagenes/lentes/91.jpg" },
+      { nombre: "Ray", precio: 44990, tipo: "opticos", genero: "mujer", img: "Imagenes/lentes/92.jpg" },
+      { nombre: "Unity", precio: 44990, tipo: "opticos", genero: "mujer", img: "Imagenes/lentes/93.jpg" },
+      { nombre: "Sweet", precio: 44990, tipo: "opticos", genero: "mujer", img: "Imagenes/lentes/94.jpg" },
+      { nombre: "Spirit", precio: 44990, tipo: "opticos", genero: "mujer", img: "Imagenes/lentes/95.jpg" },
+      { nombre: "Vision", precio: 44990, tipo: "opticos", genero: "mujer", img: "Imagenes/lentes/96.jpg" }
+    ];
+
+    // ===== LÓGICA DE PRODUCTOS =====
+
+    function mostrarProductos(lista, categoria = "Destacados") {
+      const container = document.getElementById('productos-container');
+      const titulo = document.getElementById('titulo-seccion');
+      container.innerHTML = '';
+
+      let productosAMostrar = [...lista];
+
+      if (categoria === "Destacados") {
+        titulo.innerText = "Lentes Destacados";
+        // Mezclar y tomar 20 al azar
+        productosAMostrar = productosAMostrar
+          .sort(() => 0.5 - Math.random())
+          .slice(0, 20);
+      } else if (categoria === 'todos') {
+        titulo.innerText = "Todos los Lentes";
+      } else {
+        titulo.innerText = categoria.charAt(0).toUpperCase() + categoria.slice(1);
+      }
+
+      productosAMostrar.forEach(lente => {
+        const div = document.createElement('div');
+        div.className = 'producto';
+        div.onclick = () => mostrarDetalle(lente.nombre, lente.precio, lente.img);
+        div.innerHTML = `
+          <img src="${lente.img}" alt="${lente.nombre}">
+          <h3>${lente.nombre}</h3>
+          <p>$${lente.precio.toLocaleString('es-CL')}</p>
+        `;
+        container.appendChild(div);
+      });
+    }
+
+    function filtrarTipo(tipo) {
+      const filtrados = lentes.filter(l => l.tipo === tipo);
+      mostrarProductos(filtrados, tipo);
+      document.getElementById('destacados').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function filtrarGenero(genero) {
+      const filtrados = lentes.filter(l => l.genero === genero);
+      mostrarProductos(filtrados, genero);
+      document.getElementById('destacados').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function mostrarDetalle(nombre, precio, imagen) {
+      document.getElementById('detalle-nombre').innerText = "Modelo " + nombre;
+      document.getElementById('detalle-precio').innerText = "$" + precio.toLocaleString('es-CL');
+      document.getElementById('detalle-imagen').src = imagen;
+      document.getElementById('detalle-whatsapp').href =
+        `https://wa.me/56963623444?text=Hola,%20quisiera%20consultar%20si%20el%20Modelo%20${nombre}%20está%20disponible.`;
+      
+      document.getElementById('detalle-producto').style.display = 'flex';
+      document.getElementById('detalle-producto').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function cerrarDetalle() {
+      document.getElementById('detalle-producto').style.display = 'none';
+    }
+
+    // Iniciar con destacados aleatorios
+    mostrarProductos(lentes, "Destacados");
+    goToSlide(0);
+
+  </script>
+
+</body>
+</html>
