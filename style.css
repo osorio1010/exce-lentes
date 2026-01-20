@@ -9,7 +9,7 @@ body {
   font-family: 'Poppins', 'Inter', sans-serif;
   background-color: #fff;
   color: #222;
-  overflow-x: hidden; /* Evita scroll horizontal */
+  overflow-x: hidden;
 }
 
 /* =================== BANNER PROMOCIONAL =================== */
@@ -29,17 +29,13 @@ body {
 .promo-banner span {
   display: inline-block;
   white-space: nowrap;
-  padding-left: 100%; /* Empieza fuera de la pantalla */
+  padding-left: 100%; 
   animation: scrollBanner 18s linear infinite;
 }
 
 @keyframes scrollBanner {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(-100%);
-  }
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-100%); }
 }
 
 /* =================== HEADER =================== */
@@ -50,7 +46,7 @@ header {
   background-color: white;
   padding: 10px 40px;
   position: fixed;
-  top: 37px; /* debajo del banner */
+  top: 37px; 
   width: 100%;
   z-index: 1000;
   border-bottom: 1px solid #ddd;
@@ -60,6 +56,8 @@ header {
   display: flex;
   align-items: center;
   gap: 10px;
+  text-decoration: none;
+  color: inherit;
 }
 
 .logo img {
@@ -101,19 +99,18 @@ nav a:hover {
 .slider-container {
   display: flex;
   transition: transform 0.8s ease-in-out;
-  width: 400%; /* 4 imágenes → 4 × 100% */
+  width: 400%; 
 }
 
 .slider-container img {
-  width: 25%; /* Cada imagen ocupa 25% del ancho total */
+  width: 25%; 
   height: auto;
   flex-shrink: 0;
   border-radius: 0;
 }
 
 /* Botones de navegación */
-.prev,
-.next {
+.prev, .next {
   cursor: pointer;
   position: absolute;
   top: 50%;
@@ -128,20 +125,13 @@ nav a:hover {
   z-index: 2;
 }
 
-.prev {
-  left: 20px;
-}
+.prev { left: 20px; }
+.next { right: 20px; }
 
-.next {
-  right: 20px;
-}
-
-.prev:hover,
-.next:hover {
+.prev:hover, .next:hover {
   background-color: rgba(0, 0, 0, 0.7);
 }
 
-/* Puntos indicadores */
 .slider-dots {
   text-align: center;
   margin-top: 10px;
@@ -158,11 +148,9 @@ nav a:hover {
   transition: background-color 0.3s;
 }
 
-.dot.active {
-  background-color: #f8c202;
-}
+.dot.active { background-color: #f8c202; }
 
-/* =================== SECCIÓN DESTACADOS =================== */
+/* =================== SECCIÓN PRINCIPAL =================== */
 main {
   padding-top: 40px;
   text-align: center;
@@ -176,8 +164,10 @@ main {
 .productos {
   display: flex;
   justify-content: center;
-  gap: 40px;
+  gap: 30px;
   flex-wrap: wrap;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 .producto {
@@ -188,6 +178,7 @@ main {
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
   transition: transform 0.2s;
   cursor: pointer;
+  background: white;
 }
 
 .producto:hover {
@@ -197,6 +188,7 @@ main {
 .producto img {
   width: 100%;
   border-radius: 10px;
+  object-fit: contain;
 }
 
 .producto h3 {
@@ -215,7 +207,6 @@ main {
   position: relative; 
 }
 
-/* Botón de cierre */
 .cerrar-btn {
   position: absolute;
   top: 15px;
@@ -280,23 +271,7 @@ main {
   background-color: #1ebe57;
 }
 
-/* =================== CATÁLOGO =================== */
-#catalogo {
-  text-align: center;
-  padding: 60px 20px;
-}
-
-#catalogo h2 {
-  margin-bottom: 15px;
-}
-
-.whatsapp {
-  color: #25D366;
-  font-weight: bold;
-  text-decoration: none;
-}
-
-/* =================== INFO EMPRESA =================== */
+/* =================== INFO EMPRESA & FOOTER =================== */
 .info-empresa {
   display: flex;
   justify-content: space-around;
@@ -324,14 +299,6 @@ main {
   line-height: 1.5;
 }
 
-.info-column.final {
-  text-align: center;
-}
-
-.redes {
-  margin-top: 10px;
-}
-
 .redes img {
   width: 28px;
   height: 28px;
@@ -340,91 +307,89 @@ main {
   transition: transform 0.2s;
 }
 
-.redes img:hover {
-  transform: scale(1.1);
-}
-
-/* =================== FOOTER =================== */
 footer {
   text-align: center;
   padding: 20px;
   border-top: 1px solid #ddd;
-  margin-top: 0;
   font-size: 0.9rem;
   color: #555;
   background-color: #f9f9f9;
 }
 
-/* =================== VERSIÓN MÓVIL =================== */
+/* =================== VERSIÓN MÓVIL (CORREGIDA) =================== */
 @media (max-width: 768px) {
-  .promo-banner {
-    font-size: 0.9rem;
+  /* Forzamos la fuente para que sea igual que en PC */
+  body, h1, h2, h3, a, p, span, button {
+    font-family: 'Poppins', sans-serif !important;
   }
 
   header {
     flex-direction: column;
-    align-items: flex-start;
-    padding: 10px 20px;
+    padding: 8px;
     top: 32px;
   }
 
-  .logo {
-    justify-content: center;
-    width: 100%;
+  .logo img {
+    width: 35px;
+    height: 35px;
+  }
+
+  .logo h1 {
+    font-size: 1.1rem;
   }
 
   nav ul {
-    flex-wrap: wrap;
     gap: 10px;
+    padding: 5px 0;
     justify-content: center;
-    padding: 10px 0;
   }
 
+  nav a {
+    font-size: 0.75rem;
+  }
+
+  /* Reducimos el margen superior del slider para acercarlo al header */
   .slider {
-    margin-top: 120px;
-    height: 250px;
+    margin-top: 115px; 
+    height: auto;
+    aspect-ratio: 16 / 9;
   }
 
-  .slider-container img {
-    height: 250px;
-    object-fit: cover;
+  /* Reducimos el espacio entre slider y lentes destacados */
+  main {
+    padding-top: 10px; 
   }
 
+  .destacados h2 {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+    margin-top: 10px;
+  }
+
+  /* Catálogo en 2 columnas */
   .productos {
-    flex-direction: column;
-    align-items: center;
-    gap: 20px;
+    display: grid;
+    grid-template-columns: 1fr 1fr; 
+    gap: 10px;
+    padding: 10px;
   }
 
   .producto {
-    width: 80%;
+    width: 100%;
+    padding: 10px;
   }
 
+  .producto img {
+    height: 110px;
+  }
+
+  .producto h3 {
+    font-size: 0.85rem;
+  }
+
+  /* Ajuste de detalle producto */
   #detalle-producto {
     flex-direction: column;
-    align-items: center;
-    padding: 40px 10px;
-  }
-
-  #detalle-producto img {
-    width: 90%;
-    max-width: 300px;
-  }
-
-  .info {
-    text-align: center;
-  }
-
-  .info-empresa {
-    flex-direction: column;
-    text-align: center;
-  }
-
-  .info-column {
-    width: 100%;
-  }
-
-  footer {
-    font-size: 0.8rem;
+    padding: 30px 15px;
   }
 }
